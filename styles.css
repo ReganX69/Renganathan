@@ -227,12 +227,30 @@ nav {
 
 .timeline-item.left {
     left: 0;
-    text-align: right;
+    text-align: center;
 }
 
 .timeline-item.right {
     left: 50%;
-    text-align: left;
+    text-align: center;
+}
+
+.timeline-item.left::before,
+.timeline-item.right::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 90px; /* Length of the horizontal branch */
+    height: 4px; /* Thickness of the branch */
+    background-color: var(--accent-color);
+}
+
+.timeline-item.left::before {
+    right: 5px; /* Extends to the left from the main line */
+}
+
+.timeline-item.right::before {
+    left: 5px; /* Extends to the right from the main line */
 }
 
 .timeline-item .content {
@@ -263,7 +281,7 @@ nav {
 }
 
 .timeline-item ul {
-    list-style: disc;
+    list-style: none; /* Removes default bullet or marker */
     padding-left: 1.5rem;
     text-align: left;
 }
@@ -274,21 +292,8 @@ nav {
     color: var(--text-light);
 }
 
-.timeline-item.left::after,
-.timeline-item.right::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    top: 1.5rem;
-    left: -10px;
-}
+/* Removed the colored circles */
 
-.timeline-item.right::after {
-    left: calc(100% + 10px);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -370,5 +375,83 @@ nav {
     line-height: 1.6;
 }
 
+/* General Styles for Small Screens */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 90%; /* Reduce font size slightly */
+    }
 
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .social-icons {
+        position: static;
+        margin-top: 1rem;
+    }
+
+    .timeline-container::after {
+        left: 5%; /* Adjust the vertical line for smaller screens */
+    }
+
+    .timeline-item {
+        width: 90%; /* Full width for smaller screens */
+        left: 0;
+        margin: 1rem auto;
+        text-align: left;
+    }
+
+    .timeline-item.left .content,
+    .timeline-item.right .content {
+        transform: translateX(0); /* Center content for mobile */
+    }
+
+    .timeline-item.left::before,
+    .timeline-item.right::before {
+        display: none; /* Remove horizontal branches on small screens */
+    }
+
+    .timeline-item ul {
+        padding-left: 1rem; /* Adjust padding for readability */
+    }
+
+    .timeline-item.right {
+        left: 0; /* Align to the left like the left-aligned boxes */
+    }
+}
+
+/* Specific Styles for Extra Small Screens */
+@media screen and (max-width: 480px) {
+    header {
+        padding: 0.5rem 1rem;
+    }
+
+    nav a {
+        font-size: 0.9rem; /* Smaller font for nav links */
+    }
+
+    .social-icons a {
+        width: 24px; /* Smaller icons */
+        height: 24px;
+    }
+
+    .timeline h1 {
+        font-size: 2rem; /* Reduce heading size */
+    }
+
+    .timeline-item h2 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-item .dates {
+        font-size: 0.9rem;
+    }
+}
 
